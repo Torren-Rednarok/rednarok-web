@@ -15,7 +15,10 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Validate HTML (Nu HTML Checker)
-        run: |
-          docker run --rm -v "$PWD":/work validator/validator:latest \
-            vnu --skip-non-html --Werror --format text /work
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Validate HTML
+        run: npx --yes html-validate "**/*.html"
