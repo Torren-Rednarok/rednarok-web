@@ -15,7 +15,9 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Validate HTML
-        uses: Cyb3r-Jak3/html5validator-action@v7
-        with:
-          root: .
+      - name: Validate HTML (html5validator)
+        run: |
+          docker run --rm \
+            -v "$PWD":/work \
+            ghcr.io/svenkreiss/html5validator:latest \
+            --root /work
